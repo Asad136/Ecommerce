@@ -8,12 +8,15 @@ class User(AbstractUser):
         ('admin', 'Admin'),
     )
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='buyer')
-    email = models.EmailField(unique=True)  # Ensure email is unique
+    email = models.EmailField(unique=True)
+    is_verified = models.BooleanField(default=False)
 
-    USERNAME_FIELD = 'email'  # Set email as the username field
-    REQUIRED_FIELDS = ['username']  
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
 
     def save(self, *args, **kwargs):
         if self.is_superuser:
             self.role = 'admin'
+        if self.role == 'buyer':
+            self.is_verified = True
         super().save(*args, **kwargs)

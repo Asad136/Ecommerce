@@ -3,15 +3,15 @@ from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 
 from .models import User
 
+
 class CustomUserCreationForm(UserCreationForm):
-    class Meta(UserCreationForm.Meta):
+    class Meta:
         model = User
-        fields = ('username', 'email', 'role')
+        fields = ['username', 'email', 'role', 'password1']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['role'].choices = [('buyer', 'Buyer'), ('seller', 'Seller')]
-        self.fields.pop('password2')  
 
 class EmailAuthenticationForm(AuthenticationForm):
     username = forms.EmailField(label="Email", widget=forms.EmailInput(attrs={"autofocus": True}))

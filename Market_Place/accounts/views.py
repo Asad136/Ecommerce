@@ -23,7 +23,7 @@ def custom_login(request):
             user = authenticate(request, email=email, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('home')  # Redirect to home page after successful login
+                return redirect('home')
             else:
                 messages.error(request, 'Invalid email or password.')
         else:

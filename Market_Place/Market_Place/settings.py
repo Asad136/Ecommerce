@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     #added apps
     'homeviews',
     'accounts',
+    'store',
 ]
 
 MIDDLEWARE = [
@@ -142,3 +143,6 @@ AUTH_USER_MODEL = 'accounts.User'
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',  # Keep this if you want to support username-based login too
 ]
+#medai file setting
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
