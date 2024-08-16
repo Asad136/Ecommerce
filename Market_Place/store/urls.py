@@ -14,4 +14,10 @@ urlpatterns = [
     path('<int:store_id>/products/create/', views.create_product, name='create_product'),
     path('<int:store_id>/products/<int:pk>/update/', views.update_product, name='update_product'),
     path('<int:store_id>/products/<int:pk>/delete/', views.delete_product, name='delete_product'),
+
+    path('cart/', views.view_cart, name='view_cart'),
+    path('cart/add/<int:product_id>/', views.add_to_cart, name='add_to_cart'),
+    path('cart/update/<int:product_id>/', views.update_cart, name='update_cart'),
+    path('cart/remove/<int:product_id>/', views.remove_from_cart, name='remove_from_cart'),
+
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

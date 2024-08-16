@@ -27,6 +27,9 @@ def custom_login(request):
                 login(request, user)
                 if user.role == 'buyer':
                     return redirect('buyer_landing')
+                elif user.role == 'seller':
+                    if hasattr(user, 'store'):
+                        return redirect('store_detail', pk=user.store.pk)
                 else:
                     return redirect('home')
             else:

@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     {% load static %}
+{% load cart_extras %}
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Role-Based E-Commerce WebApp{% endblock %}</title>
     {% comment %} <link rel="stylesheet" href="{% static 'css/base.css' %}"> {% endcomment %}
@@ -20,6 +22,9 @@
                     <a class="nav-link" href="{%url 'home'%}">Home</a>
                 </li>
                 {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'view_cart'%}">View Cart</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                 </li>

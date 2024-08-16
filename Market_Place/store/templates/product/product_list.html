@@ -1,3 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome to the E-Commerce Platform{% endblock %}
+
+{% block content %}
+
 <h1>{{ store.name }} - Products</h1>
 <a href="{% url 'create_product' store.id %}">Add Product</a>
 <ul>
@@ -15,3 +21,4 @@
     </li>
     {% endfor %}
 </ul>
+{% endblock %}

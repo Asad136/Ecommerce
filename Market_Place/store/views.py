@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Store,Product
 from .forms import StoreForm,ProductForm
+from django.http import JsonResponse
+
 
 @login_required
 def create_store(request):
@@ -111,3 +113,44 @@ def delete_product(request, store_id, pk):
         return redirect('product_list', store_id=store_id)
     else:
         return redirect('home')
+
+from django.http import JsonResponse
+
+def add_to_cart(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    cart = request.session.get('cart', {})
+
+    if str(product_id) in cart:
+        cart[str(product_id)]['quantity'] += 1
+    else:
+        cart[str(product_id)] = {
+            'name': product.name,
+            'price': str(product.price),
+            'quantity': 1,
+            'product_pic': product.product_pic.url
+        }
+
+    request.session['cart'] = cart
+    return redirect('view_cart')
+
+def view_cart(request):
+    cart = request.session.get('cart', {})
+    return render(request, 'cart/cart.html', {'cart': cart})
+
+def update_cart(request, product_id):
+    cart = request.session.get('cart', {})
+    if str(product_id) in cart:
+        quantity = int(request.POST.get('quantity'))
+        if quantity > 0:
+            cart[str(product_id)]['quantity'] = quantity
+        else:
+            del cart[str(product_id)]
+    request.session['cart'] = cart
+    return redirect('view_cart')
+
+def remove_from_cart(request, product_id):
+    cart = request.session.get('cart', {})
+    if str(product_id) in cart:
+        del cart[str(product_id)]
+    request.session['cart'] = cart
+    return redirect('view_cart')
