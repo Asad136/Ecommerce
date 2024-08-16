@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login,authenticate
+from django.contrib.auth import login,authenticate,logout as auth_logout
+from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm,EmailAuthenticationForm
 from django.contrib import messages
+from store.models import Product
 
 def signup(request):
     if request.method == 'POST':
@@ -23,7 +25,10 @@ def custom_login(request):
             user = authenticate(request, email=email, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('home')
+                if user.role == 'buyer':
+                    return redirect('buyer_landing')
+                else:
+                    return redirect('home')
             else:
                 messages.error(request, 'Invalid email or password.')
         else:
@@ -32,3 +37,16 @@ def custom_login(request):
         form = EmailAuthenticationForm()
     
     return render(request, 'accounts/login.html', {'form': form})
+
+@login_required
+def logout(request):
+    auth_logout(request)
+    return render(request,'landing.html')
+
+@login_required
+def buyer_landing(request):
+    products = Product.objects.all()
+    query = request.GET.get('q')
+    if query:
+        products = products.filter(name__icontains=query)
+    return render(request, 'buyer_landing.html', {'products': products})

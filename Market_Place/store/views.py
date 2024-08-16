@@ -84,6 +84,8 @@ def product_list(request, store_id):
 @login_required
 def product_detail(request, store_id, pk):
     product = get_object_or_404(Product, pk=pk, store_id=store_id)
+    if request.user.role == 'buyer':
+        return render(request, 'product/product_detail_for_buyer.html', {'product': product})
     return render(request, 'product/product_detail.html', {'product': product})
 
 @login_required
