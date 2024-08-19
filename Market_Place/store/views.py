@@ -233,12 +233,11 @@ def seller_orders(request):
     store = request.user.store
     orders = Order.objects.filter(items__product__store=store).distinct()
 
-    # Filter order items to only include those that belong to the seller's store
     orders_with_filtered_items = []
     for order in orders:
         filtered_items = order.items.filter(product__store=store)
         if filtered_items.exists():
-            order.filtered_items = filtered_items  # Attach filtered items to the order
+            order.filtered_items = filtered_items 
             orders_with_filtered_items.append(order)
 
     return render(request, 'store/seller_orders.html', {'orders': orders_with_filtered_items})
