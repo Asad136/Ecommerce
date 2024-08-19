@@ -9,6 +9,8 @@ class User(AbstractUser):
     )
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='buyer')
     email = models.EmailField(unique=True)
+    phone_number = models.CharField(max_length=15, blank=True, null=True)
+    address = models.TextField(blank=True, null=True)
     is_verified = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'

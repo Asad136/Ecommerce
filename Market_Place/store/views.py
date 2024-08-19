@@ -1,8 +1,12 @@
+import stripe
 from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Store,Product
+from .models import Store,Product,Order,OrderItem
+from django.conf import settings
 from .forms import StoreForm,ProductForm
 from django.http import JsonResponse
+from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
 
 
 @login_required
@@ -154,3 +158,88 @@ def remove_from_cart(request, product_id):
         del cart[str(product_id)]
     request.session['cart'] = cart
     return redirect('view_cart')
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
+@login_required
+def create_checkout_session(request):
+    cart = request.session.get('cart', {})
+    total = sum(float(item['price']) * item['quantity'] for item in cart.values())
+
+    if total > 0:
+        order = Order.objects.create(
+            user=request.user,
+            order_id=f"order_{request.user.id}_{Order.objects.count() + 1}",
+            total_amount=total,
+            status='Pending',
+        )
+        request.session['order_id'] = order.id
+
+        for item_id, item in cart.items():
+            product = get_object_or_404(Product, id=item_id)
+            OrderItem.objects.create(
+                order=order,
+                product=product,
+                quantity=item['quantity'],
+                price=item['price']
+            )
+
+        session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=[
+                {
+                    'price_data': {
+                        'currency': 'usd',
+                        'product_data': {
+                            'name': 'Order Total',
+                        },
+                        'unit_amount': int(total * 100),
+                    },
+                    'quantity': 1,
+                },
+            ],
+            mode='payment',
+            success_url=request.build_absolute_uri(reverse('order_success')),
+            cancel_url=request.build_absolute_uri(reverse('view_cart')),
+        )
+
+        return JsonResponse({'id': session.id})
+    else:
+        return redirect('cart')
+
+@login_required
+@csrf_exempt
+def order_success(request):
+    order_id = request.session.get('order_id')
+
+    if not order_id:
+        return redirect('cart')
+
+    order = get_object_or_404(Order, id=order_id)
+
+    order.status = 'Completed'
+    order.save()
+
+    del request.session['cart']
+    del request.session['order_id']
+
+    return render(request, 'cart/order_success.html', {'order': order})
+
+@login_required
+def seller_orders(request):
+    if request.user.role != 'seller':
+        return redirect('home')
+    
+    store = request.user.store
+    orders = Order.objects.filter(items__product__store=store).distinct()
+
+    # Filter order items to only include those that belong to the seller's store
+    orders_with_filtered_items = []
+    for order in orders:
+        filtered_items = order.items.filter(product__store=store)
+        if filtered_items.exists():
+            order.filtered_items = filtered_items  # Attach filtered items to the order
+            orders_with_filtered_items.append(order)
+
+    return render(request, 'store/seller_orders.html', {'orders': orders_with_filtered_items})
+

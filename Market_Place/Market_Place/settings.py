@@ -9,10 +9,10 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-import os
 from pathlib import Path
+import os   
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -21,11 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-)!m!goy*qg6v4@z@9sn*saa4ksxg6-!eo+k*v-!)f(xlpn5kp^'
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -147,3 +146,5 @@ AUTHENTICATION_BACKENDS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+STRIPE_PUBLIC_KEY='pk_test_51PpZmvAgD69oGeT6s9BF85B7N74h4XryqOlxTsoy8tA43xnyIqw6BqN1RzoJojsaqHWI42wXaWT1hCRtOpTGwGXx00SY3L5Yii'
+STRIPE_SECRET_KEY='sk_test_51PpZmvAgD69oGeT689zOQQlsTtF07VEZQuQCCXZ8s3lhwW7qZkfXuxbHVziFs5dglatYymEFWMDhVZ5WxELLsiHE0005FpkBbS'
