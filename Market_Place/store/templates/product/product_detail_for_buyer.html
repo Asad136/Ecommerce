@@ -13,8 +13,11 @@
             <p>{{ product.description }}</p>
             <p><strong>Stock Available:</strong> {{ product.stock }}</p>
             <p><strong>Price:</strong> ${{ product.price }}</p>
+            {% if product.stock > 0 %}
             <button type="button" class="btn btn-primary" onclick="location.href='{% url 'add_to_cart' product_id=product.id %}'">Add to Cart</button>
-        </div>
+        {% else %}
+            <p class="text-danger">Out of Stock</p>
+        {% endif %}        </div>
     </div>
 </div>
 {% endblock %}

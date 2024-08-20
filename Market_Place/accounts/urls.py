@@ -9,6 +9,8 @@ urlpatterns = [
     path('login/', views.custom_login, name='login'),
     path('logout/',views.logout , name='logout'),
     path('buyer/', views.buyer_landing, name='buyer_landing'),
+    path('seller/', views.seller_landing_page, name='seller_landing_page'),
+    path('admin_landing',views.admin_landing,name='admin_landing'),
     path('password_change/', auth_views.PasswordChangeView.as_view(template_name='accounts/password_change.html'), name='password_change'),
     path('password_change/done/', auth_views.PasswordChangeDoneView.as_view(template_name='accounts/password_change_done.html'), name='password_change_done'),
     path('password_reset/', auth_views.PasswordResetView.as_view(template_name='accounts/password_reset.html'), name='password_reset'),

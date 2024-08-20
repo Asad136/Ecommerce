@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib.auth import login,authenticate,logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm,EmailAuthenticationForm
 from django.contrib import messages
-from store.models import Product
+from store.models import Product,Store
 
 def signup(request):
     if request.method == 'POST':
@@ -31,9 +31,9 @@ def custom_login(request):
                     if hasattr(user, 'store'):
                         return redirect('store_detail', pk=user.store.pk)
                     else:
-                        return redirect('home')
+                        return redirect('seller_landing_page')
                 else:
-                    return redirect('home')
+                    return redirect('admin_landing')
             else:
                 messages.error(request, 'Invalid email or password.')
         else:
@@ -55,3 +55,16 @@ def buyer_landing(request):
     if query:
         products = products.filter(name__icontains=query)
     return render(request, 'buyer_landing.html', {'products': products})
+
+@login_required
+def admin_landing(request):
+    products= Product.objects.all()
+    query = request.GET.get('q')
+    if query:
+        products = products.filter(name__icontains=query)
+    return render(request,'admin_landing.html',{'products': products})
+
+
+def seller_landing_page(request):
+
+    return render(request,'seller_landing_page.html')

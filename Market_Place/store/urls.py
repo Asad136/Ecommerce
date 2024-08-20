@@ -15,6 +15,7 @@ urlpatterns = [
     path('<int:store_id>/products/<int:pk>/update/', views.update_product, name='update_product'),
     path('<int:store_id>/products/<int:pk>/delete/', views.delete_product, name='delete_product'),
 
+
     path('cart/', views.view_cart, name='view_cart'),
     path('cart/add/<int:product_id>/', views.add_to_cart, name='add_to_cart'),
     path('cart/update/<int:product_id>/', views.update_cart, name='update_cart'),
@@ -22,6 +23,11 @@ urlpatterns = [
     path('create-checkout-session/', views.create_checkout_session, name='create_checkout_session'),
     path('order-success/', views.order_success, name='order_success'),
     path('seller/orders/', views.seller_orders, name='seller_orders'),
+    path('order-history/', views.order_history, name='order_history'),
+    path('order/<int:order_id>/', views.order_detail, name='order_detail'),
+    path('<int:store_id>/product_analytics/', views.product_analytics, name='product_analytics'),
+    path('verify-sellers/', views.verify_sellers, name='verify_sellers'),
+
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

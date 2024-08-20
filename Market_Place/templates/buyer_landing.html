@@ -9,7 +9,9 @@
             <input class="form-control me-2" type="search" name="q" placeholder="Search for products" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
-
+        {% if user.role == 'buyer' %}
+        <a href="{% url 'order_history' %}" class="btn btn-primary">View Order History</a>
+        {% endif %}
         <div class="row">
             {% for product in products %}
                 <div class="col-md-4 mb-4">

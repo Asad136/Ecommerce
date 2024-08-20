@@ -1,6 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome to the E-Commerce Platform{% endblock %}
+
+{% block content %}
 <h1>{{ store.name }}</h1>
 <img src="{{ store.store_pic.url }}" alt="{{ store.name }}">
 <p>{{ store.description }}</p>
 <a href="{% url 'update_store' store.pk %}">Edit Store</a>
 <a href="{% url 'delete_store' store.pk %}">Delete Store</a>
 <a href="{% url 'create_product' store.pk %}">Add Product</a>
+<a href="{% url 'product_analytics' store.pk %}" class="btn btn-info">View Analytics</a>
+
+{% endblock %}

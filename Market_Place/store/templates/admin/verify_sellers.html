@@ -1,0 +1,30 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Unverified Sellers</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for seller in unverified_sellers %}
+                <tr>
+                    <td>{{ seller.username }}</td>
+                    <td>{{ seller.email }}</td>
+                    <td>
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="seller_id" value="{{ seller.id }}">
+                            <button type="submit">Verify</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

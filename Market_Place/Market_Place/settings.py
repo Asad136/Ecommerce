@@ -136,6 +136,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'jaksdjflaskjdfljasdljfas@gmail.com'
 EMAIL_HOST_PASSWORD = 'vpdgtqcftqlxsgsz'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 AUTH_USER_MODEL = 'accounts.User'
 

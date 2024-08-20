@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if user.is_authenticated and user.role == 'Seller' %}
+        {% if not user.is_verified %}
+            <h2>Waiting for Verification</h2>
+            <p>Your account is under review. You will be able to create a store once your account is verified.</p>
+        {% else %}
+            <h2>Create Your Store</h2>
+            <p>Your account is verified! You can now create your store.</p>
+            <a href="{% url 'create_store' %}" class="btn btn-primary">Create Store</a>
+        {% endif %}
+    {% else %}
+        <p>You do not have the necessary permissions to access this page.</p>
+    {% endif %}
+{% endblock %}
+    
