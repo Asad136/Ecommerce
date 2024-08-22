@@ -25,8 +25,6 @@ def verify_sellers(request):
         seller = User.objects.get(id=seller_id)
         seller.is_verified = True
         seller.save()
-
-        # Send email notification
         send_mail(
             'Seller Verification',
             'Congratulations, your account has been verified!',
@@ -306,7 +304,6 @@ def product_analytics(request, store_id):
         last_7_days = [today - timedelta(days=i) for i in range(7)]
         labels = [day.strftime('%Y-%m-%d') for day in last_7_days]
         
-        # Initialize data lists
         total_sales_data = [0] * 7
         total_quantity_data = [0] * 7
         
@@ -334,5 +331,13 @@ def product_analytics(request, store_id):
         }
         
         return render(request, 'store/product_analytics.html', context)
+    else:
+        return redirect('home')
+@login_required
+def seller_product_stock(request):
+    if request.user.role == 'seller':
+        store = request.user.store
+        products = Product.objects.filter(store=store)
+        return render(request, 'store/seller_product_stock.html', {'products': products})
     else:
         return redirect('home')

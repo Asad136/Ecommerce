@@ -3,25 +3,39 @@
 {% block title %}Order Details{% endblock %}
 
 {% block content %}
-    <div class="container mt-4">
-        <h2>Order Details</h2>
+    <div class="container mt-5">
+        <div class="card shadow-lg p-4 rounded bg-light text-dark">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4 text-dark">Order Details</h2>
 
-        <p><strong>Order ID:</strong> {{ order.order_id }}</p>
-        <p><strong>Total Amount:</strong> ${{ order.total_amount }}</p>
-        <p><strong>Status:</strong> {{ order.status }}</p>
-        <p><strong>Date:</strong> {{ order.created_at|date:"d M Y H:i" }}</p>
+                <div class="order-info mb-4">
+                    <p><strong class="text-dark">Order ID:</strong> {{ order.order_id }}</p>
+                    <p><strong class="text-dark">Total Amount:</strong> <span class="text-success">${{ order.total_amount }}</span></p>
+                    <p><strong class="text-dark">Status:</strong> 
+                        <span class="badge {% if order.status == 'Delivered' %} bg-success {% elif order.status == 'Pending' %} bg-warning {% else %} bg-secondary {% endif %}">
+                            {{ order.status }}
+                        </span>
+                    </p>
+                    <p><strong class="text-dark">Date:</strong> {{ order.created_at|date:"d M Y H:i" }}</p>
+                </div>
 
-        <h3>Order Items</h3>
-        <ul class="list-group">
-            {% for item in order_items %}
-                <li class="list-group-item">
-                    <strong>Product:</strong> {{ item.product.name }} <br>
-                    <strong>Quantity:</strong> {{ item.quantity }} <br>
-                    <strong>Price:</strong> ${{ item.price }}
-                </li>
-            {% endfor %}
-        </ul>
+                <h3 class="mb-4 text-dark">Order Items</h3>
+                <ul class="list-group mb-4">
+                    {% for item in order_items %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center bg-white text-dark">
+                            <div>
+                                <strong class="text-dark">Product:</strong> {{ item.product.name }} <br>
+                                <strong class="text-dark">Quantity:</strong> {{ item.quantity }} 
+                            </div>
+                            <div>
+                                <strong class="text-dark">Price:</strong> <span class="text-success">${{ item.price }}</span>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
 
-        <a href="{% url 'order_history' %}" class="btn btn-secondary mt-3">Back to Order History</a>
+                <a href="{% url 'order_history' %}" class="btn btn-secondary btn-lg btn-block">Back to Order History</a>
+            </div>
+        </div>
     </div>
 {% endblock %}

@@ -27,6 +27,7 @@ urlpatterns = [
     path('order/<int:order_id>/', views.order_detail, name='order_detail'),
     path('<int:store_id>/product_analytics/', views.product_analytics, name='product_analytics'),
     path('verify-sellers/', views.verify_sellers, name='verify_sellers'),
+    path('seller/product-stock/', views.seller_product_stock, name='seller_product_stock'),
 
 
 

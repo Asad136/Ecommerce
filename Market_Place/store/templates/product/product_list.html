@@ -1,24 +1,28 @@
 {% extends 'base.html' %}
 
-{% block title %}Welcome to the E-Commerce Platform{% endblock %}
+{% block title %}Products for {{ store.name }}{% endblock %}
 
 {% block content %}
-
-<h1>{{ store.name }} - Products</h1>
-<a href="{% url 'create_product' store.id %}">Add Product</a>
-<ul>
-    {% for product in products %}
-    <li>
-        <img src="{{ product.product_pic.url }}" alt="{{ product.name }}">
-        <h2>{{ product.name }}</h2>
-        <p>{{ product.description }}</p>
-        <p>Price: ${{ product.price }}</p>
-        <p>Stock: {{ product.stock }}</p>
-        <a href="{% url 'update_product' store.id product.id %}">Edit</a>
-        <a href="{% url 'delete_product' store.id product.id %}">Delete</a>
-        <a href="{% url 'product_detail' store_id=store.id pk=product.pk %}">View Details</a>
-
-    </li>
-    {% endfor %}
-</ul>
+<div class="container mt-4">
+    <h1 class="mb-4">{{ store.name }} - Products</h1>
+    <a href="{% url 'create_product' store.id %}" class="btn btn-primary mb-4">Add Product</a>
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-4 mb-4">
+            <div class="card sellerproduct-card">
+                <img src="{{ product.product_pic.url }}" alt="{{ product.name }}" class="card-img-top sellerproduct-img">
+                <div class="card-body">
+                    <h5 class="card-title sellerproduct-title">{{ product.name }}</h5>
+                    <p class="card-text sellerproduct-description">{{ product.description }}</p>
+                    <p class="card-text sellerproduct-price">Price: ${{ product.price }}</p>
+                    <p class="card-text sellerproduct-stock">Stock: {{ product.stock }}</p>
+                    <a href="{% url 'update_product' store.id product.id %}" class="btn btn-secondary sellerproduct-btn">Edit</a>
+                    <a href="{% url 'delete_product' store.id product.id %}" class="btn btn-danger sellerproduct-btn">Delete</a>
+                    <a href="{% url 'product_detail' store_id=store.id pk=product.pk %}" class="btn btn-info sellerproduct-btn">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

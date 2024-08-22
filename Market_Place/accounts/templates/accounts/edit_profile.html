@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Edit Profile</title>
     <style>
         /* Purplish Dark Theme Styling */
         body {
@@ -17,105 +17,119 @@
             margin: 0;
         }
 
-        .login-container {
+        .profile-container {
             background-color: #3B004A;
-            padding: 40px;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
             width: 100%;
-            max-width: 400px;
+            max-width: 350px;
+            height: auto;
         }
 
-        .login-container h2 {
-            margin-bottom: 30px;
+        .profile-container h2 {
+            margin-bottom: 15px;
             text-align: center;
-            font-size: 24px;
+            font-size: 20px;
             color: #f5f5f5;
         }
 
-        .login-container form {
+        .profile-container form {
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: stretch;
         }
 
-        .login-container form .form-group {
+        .profile-container form .form-group {
             width: 100%;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
-        .login-container form label {
+        .profile-container form label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
             color: #bb86fc;
             font-weight: bold;
         }
 
-        .login-container form input {
+        .profile-container form input, .profile-container form select, .profile-container form textarea {
             width: 100%;
             background-color: #4A005C;
             color: #ffffff;
             border: 1px solid #6200ea;
-            padding: 12px;
+            padding: 8px;
             border-radius: 4px;
-            font-size: 16px;
+            font-size: 14px;
+            box-sizing: border-box;
         }
 
-        .login-container form input:focus {
+        .profile-container form textarea {
+            resize: none;
+            height: 40px;
+        }
+
+        .profile-container form input:focus, .profile-container form select:focus, .profile-container form textarea:focus {
             border-color: #bb86fc;
             outline: none;
         }
 
-        .login-container form button {
-            width: 60%;
+        .profile-container form button {
+            width: 100%;
             background-color: #bb86fc;
             color: #ffffff;
-            padding: 16px;
+            padding: 10px;
             border: none;
             border-radius: 4px;
-            font-size: 16px;
+            font-size: 14px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
-        .login-container form button:hover {
+        .profile-container form button:hover {
             background-color: #9c4dcc;
         }
 
-        .login-container .register-link {
-            margin-top: 20px;
+        .profile-container .login-link {
+            margin-top: 15px;
             text-align: center;
         }
 
-        .login-container .register-link a {
+        .profile-container .login-link a {
             color: #bb86fc;
             text-decoration: none;
             font-weight: bold;
         }
 
-        .login-container .register-link a:hover {
+        .profile-container .login-link a:hover {
             color: #ffffff;
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
+    <div class="profile-container">
+        <h2>Edit Profile</h2>
         <form method="post">
             {% csrf_token %}
             <div class="form-group">
-                <label for="id_username">Email:</label>
+                <label for="id_username">Username:</label>
                 {{ form.username }}
             </div>
             <div class="form-group">
-                <label for="id_password">Password:</label>
-                {{ form.password }}
+                <label for="id_email">Email:</label>
+                {{ form.email }}
             </div>
-            <button type="submit">Login</button>
+            <div class="form-group">
+                <label for="id_phone_number">Phone Number:</label>
+                {{ form.phone_number }}
+            </div>
+            <div class="form-group">
+                <label for="id_address">Address:</label>
+                {{ form.address }}
+            </div>
+          
+            <button type="submit">Save Changes</button>
         </form>
-        <div class="register-link">
-            <p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
-        </div>
+       
     </div>
 </body>
 </html>

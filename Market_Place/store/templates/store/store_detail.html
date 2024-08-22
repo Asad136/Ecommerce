@@ -3,12 +3,31 @@
 {% block title %}Welcome to the E-Commerce Platform{% endblock %}
 
 {% block content %}
-<h1>{{ store.name }}</h1>
-<img src="{{ store.store_pic.url }}" alt="{{ store.name }}">
-<p>{{ store.description }}</p>
-<a href="{% url 'update_store' store.pk %}">Edit Store</a>
-<a href="{% url 'delete_store' store.pk %}">Delete Store</a>
-<a href="{% url 'create_product' store.pk %}">Add Product</a>
-<a href="{% url 'product_analytics' store.pk %}" class="btn btn-info">View Analytics</a>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <!-- Store Image -->
+                <img src="{{ store.store_pic.url }}" class="card-img-top" alt="{{ store.name }}" style="width: 300px; height: 300px; object-fit: cover; border-radius: 8px; margin: 20px auto;">
 
+                <div class="card-body text-center">
+                    <!-- Store Name -->
+                    <h1 class="card-title mb-3 text-dark">{{ store.name }}</h1>
+                    
+                    <!-- Store Description -->
+                    <p class="card-text mb-4 text-secondary">{{ store.description }}</p>
+                    
+                    <!-- Action Buttons -->
+                    <div class="d-flex flex-column flex-md-row justify-content-center">
+                        <a href="{% url 'update_store' store.pk %}" class="btn btn-primary mb-2 mb-md-0 me-md-2">Edit Store</a>
+                        <a href="{% url 'delete_store' store.pk %}" class="btn btn-danger mb-2 mb-md-0 me-md-2">Delete Store</a>
+                        <a href="{% url 'create_product' store.pk %}" class="btn btn-success mb-2 mb-md-0 me-md-2">Add Product</a>
+                        <a href="{% url 'product_list' store.pk %}" class="btn btn-secondary mb-2 mb-md-0 me-md-2">Products </a>
+                        <a href="{% url 'product_analytics' store.pk %}" class="btn btn-info mb-2 mb-md-0">View Analytics</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
