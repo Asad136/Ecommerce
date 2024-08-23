@@ -3,77 +3,125 @@
 {% block title %}Product Analytics{% endblock %}
 
 {% block content %}
-    <div class="container mt-4">
-        <h1>Analytics for {{ store.name }}</h1>
+<div class="container mt-4">
+    <h1 class="text-dark">Analytics for {{ store.name }}</h1>
 
-        <canvas id="salesChart" width="400" height="200"></canvas>
-        <canvas id="quantityChart" width="400" height="200"></canvas>
+    <canvas id="salesChart" width="400" height="200"></canvas>
+    <canvas id="quantityChart" width="400" height="200"></canvas>
 
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const labels = {{ labels|safe }};
-                const totalSalesData = {{ total_sales_data|safe }};
-                const totalQuantityData = {{ total_quantity_data|safe }};
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const labels = {{ labels|safe }};
+            const totalSalesData = {{ total_sales_data|safe }};
+            const totalQuantityData = {{ total_quantity_data|safe }};
 
-                const ctxSales = document.getElementById('salesChart').getContext('2d');
-                new Chart(ctxSales, {
-                    type: 'bar',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            label: 'Total Sales ($)',
-                            data: totalSalesData,
-                            backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
+            const ctxSales = document.getElementById('salesChart').getContext('2d');
+            new Chart(ctxSales, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Total Sales ($)',
+                        data: totalSalesData,
+                        backgroundColor: 'rgba(255, 87, 34, 0.6)', // Daraz red
+                        borderColor: 'rgba(255, 87, 34, 1)', // Daraz red
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#333333'
+                            },
+                            grid: {
+                                color: '#e0e0e0'
                             }
                         },
-                        plugins: {
-                            legend: {
-                                labels: {
-                                    color: 'rgb(255, 255, 255)'
-                                }
+                        x: {
+                            ticks: {
+                                color: '#333333'
+                            },
+                            grid: {
+                                color: '#e0e0e0'
                             }
                         }
-                    }
-                });
-
-                const ctxQuantity = document.getElementById('quantityChart').getContext('2d');
-                new Chart(ctxQuantity, {
-                    type: 'bar',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            label: 'Total Quantity Sold',
-                            data: totalQuantityData,
-                            backgroundColor: 'rgba(153, 102, 255, 0.6)',
-                            borderColor: 'rgba(153, 102, 255, 1)',
-                            borderWidth: 1
-                        }]
                     },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#333333'
                             }
                         },
-                        plugins: {
-                            legend: {
-                                labels: {
-                                    color: 'rgb(255, 255, 255)'
-                                }
-                            }
+                        title: {
+                            display: true,
+                            text: 'Total Sales by Product',
+                            color: '#333333'
+                        }
+                    },
+                    elements: {
+                        line: {
+                            borderColor: '#333333'
                         }
                     }
-                });
+                }
             });
-        </script>
-    </div>
+
+            const ctxQuantity = document.getElementById('quantityChart').getContext('2d');
+            new Chart(ctxQuantity, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Total Quantity Sold',
+                        data: totalQuantityData,
+                        backgroundColor: 'rgba(0, 150, 136, 0.6)', // Daraz green
+                        borderColor: 'rgba(0, 150, 136, 1)', // Daraz green
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#333333'
+                            },
+                            grid: {
+                                color: '#e0e0e0'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#333333'
+                            },
+                            grid: {
+                                color: '#e0e0e0'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#333333'
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Total Quantity Sold by Product',
+                            color: '#333333'
+                        }
+                    },
+                    elements: {
+                        line: {
+                            borderColor: '#333333'
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</div>
 {% endblock %}

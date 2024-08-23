@@ -4,8 +4,12 @@
 
 {% block content %}
 <div class="container my-5">
-    <h2>Thank you for your order!</h2>
-    <p>Your order ID is: {{ order.order_id }}</p>
-    <p>Total amount: ${{ order.total_amount }}</p>
+    <div class="card bg-light text-dark border-warning">
+        <div class="card-body text-center">
+            <h2 class="card-title mb-4 text-warning">Thank you for your order!</h2>
+            <p class="card-text mb-2">Your order ID is: <strong>{{ order.order_id }}</strong></p>
+            <p class="card-text">Total amount: <strong>${{ order.total_amount }}</strong></p>
+        </div>
+    </div>
 </div>
 {% endblock %}

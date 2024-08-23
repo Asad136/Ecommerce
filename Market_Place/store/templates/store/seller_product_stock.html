@@ -3,8 +3,51 @@
 {% block title %}Product Stock - Seller{% endblock %}
 
 {% block content %}
+<style>
+    /* Button Styles */
+    .btn-custom {
+        background-color: #FF8E2B; /* Button background color */
+        color: #ffffff; /* Button text color */
+        border: 2px solid #2E77AE; /* Button border color */
+    }
+
+    .btn-custom:hover {
+        background-color: #e67e22; /* Slightly darker shade for hover effect */
+        border-color: #2E77AE; /* Keep border color consistent */
+        color: #ffffff; /* Button text color on hover */
+    }
+
+    /* Text and Table Styles */
+    h1 {
+        color: #0D2137; /* Heading text color */
+    }
+
+    .table {
+        background-color: #ffffff; /* Table background color */
+        border: 1px solid #e0e0e0; /* Table border color */
+    }
+
+    thead {
+        background-color: #FF8E2B; /* Table header background color */
+        color: #ffffff; /* Table header text color */
+    }
+
+    tbody tr {
+        background-color: #E9ECEF; /* Table row background color */
+        color: #0D2137; /* Table row text color */
+    }
+
+    .text-center {
+        color: #0D2137; /* Centered text color */
+    }
+
+    .no-products-message {
+        color: #666666; /* Color for no products message */
+    }
+</style>
+
 <div class="container">
-    <h1>Product Stock Quantities</h1>
+    <h1 class="text-primary">Product Stock Quantities</h1>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -22,7 +65,7 @@
             </tr>
             {% empty %}
             <tr>
-                <td colspan="4">No products available.</td>
+                <td colspan="3" class="text-center">No products available.</td>
             </tr>
             {% endfor %}
         </tbody>

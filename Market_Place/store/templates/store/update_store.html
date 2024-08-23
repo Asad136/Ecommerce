@@ -3,32 +3,63 @@
 {% block title %}Update Store{% endblock %}
 
 {% block content %}
+<style>
+    .btn-custom {
+        background-color: #FF8E2B; /* Button background color */
+        color: #0D2137; /* Button text color */
+        border: 2px solid #2E77AE; /* Button border color */
+    }
+
+    .btn-custom:hover {
+        background-color: #e67e22; /* Slightly darker shade for hover effect */
+        border-color: #2E77AE; /* Keep border color consistent */
+        color: #0D2137; /* Button text color on hover */
+    }
+
+    .form-label-custom {
+        color: #0D2137; /* Label text color */
+    }
+
+    .form-control-custom {
+        border: 1px solid #e0e0e0; /* Form control border color */
+    }
+
+    .card-custom {
+        background-color: #ffffff; /* Card background color */
+        border: 1px solid #e0e0e0; /* Card border color */
+    }
+
+    .text-custom {
+        color: #0D2137; /* Custom text color */
+    }
+</style>
+
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-8 mx-auto">
-            <div class="card shadow-sm">
+            <div class="card shadow-sm card-custom">
                 <div class="card-body">
-                    <h2 class="card-title mb-4 text-center">Update Store</h2>
+                    <h2 class="card-title mb-4 text-center text-custom">Update Store</h2>
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         
                         <div class="mb-3">
-                            <label for="{{ form.store_pic.id_for_label }}" class="form-label">Store Picture</label>
-                            <input type="file" name="store_pic" id="{{ form.store_pic.id_for_label }}" class="form-control">
+                            <label for="{{ form.store_pic.id_for_label }}" class="form-label form-label-custom">Store Picture</label>
+                            <input type="file" name="store_pic" id="{{ form.store_pic.id_for_label }}" class="form-control form-control-custom">
                         </div>
 
                         <div class="mb-3">
-                            <label for="{{ form.name.id_for_label }}" class="form-label">Store Name</label>
-                            <input type="text" name="name" id="{{ form.name.id_for_label }}" value="{{ form.name.value }}" class="form-control">
+                            <label for="{{ form.name.id_for_label }}" class="form-label form-label-custom">Store Name</label>
+                            <input type="text" name="name" id="{{ form.name.id_for_label }}" value="{{ form.name.value }}" class="form-control form-control-custom">
                         </div>
 
                         <div class="mb-3">
-                            <label for="{{ form.description.id_for_label }}" class="form-label">Description</label>
-                            <textarea name="description" id="{{ form.description.id_for_label }}" class="form-control" rows="4">{{ form.description.value }}</textarea>
+                            <label for="{{ form.description.id_for_label }}" class="form-label form-label-custom">Description</label>
+                            <textarea name="description" id="{{ form.description.id_for_label }}" class="form-control form-control-custom" rows="4">{{ form.description.value }}</textarea>
                         </div>
 
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Update Store</button>
+                            <button type="submit" class="btn btn-custom">Update Store</button>
                         </div>
                     </form>
                 </div>

@@ -3,25 +3,41 @@
 {% block title %}Welcome to the E-Commerce Platform{% endblock %}
 
 {% block content %}
+    <style>
+        .btn-custom {
+            background-color: #FF8E2B;
+            color: white;
+            border: 2px solid #2E77AE;
+        }
+        .btn-custom:hover {
+            background-color: #e67e22; /* Slightly darker shade for hover effect */
+            border-color: #2E77AE; /* Keep border color consistent */
+            color: white;
+        }
+    </style>
 
     <div class="container mt-4">
+        <!-- Search Form -->
         <form method="GET" class="d-flex mb-4">
             <input class="form-control me-2" type="search" name="q" placeholder="Search for products" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            <button class="btn btn-custom" type="submit">Search</button>
         </form>
         
+        <!-- Product Cards -->
         <div class="row">
             {% for product in products %}
                 <div class="col-md-4 mb-4">
-                    <div class="card">
+                    <div class="card border-0 shadow-sm">
                         {% load static %}
-                        <img src="{{ product.product_pic.url }}" class="card-img-top" alt="{{ product.name }}">
+                        <div class="d-flex justify-content-center align-items-center" style="height: 300px; overflow: hidden;">
+                            <img src="{{ product.product_pic.url }}" class="card-img-top" alt="{{ product.name }}" style="height: 100%; width: 100%; object-fit: cover;">
+                        </div>
                         <div class="card-body">
                             <h5 class="card-title text-dark">{{ product.name }}</h5>
-                            <p class="card-text text-secondary">{{ product.description }}</p>
-                            <p class="card-text text-secondary">Stocks :{{ product.stock }}</p>
-                            <p class="card-text text-secondary"><strong>${{ product.price }}</strong></p>
-                            <a href="{% url 'product_detail' store_id=product.store.id pk=product.id %}" class="btn btn-primary">View Details</a>
+                            <p class="card-text text-muted">{{ product.description }}</p>
+                            <p class="card-text text-muted">Stocks: {{ product.stock }}</p>
+                            <p class="card-text text-muted"><strong>${{ product.price }}</strong></p>
+                            <a href="{% url 'product_detail' store_id=product.store.id pk=product.id %}" class="btn btn-custom">View Details</a>
                         </div>
                     </div>
                 </div>

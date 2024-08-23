@@ -3,11 +3,53 @@
 {% block title %}Welcome to the E-Commerce Platform{% endblock %}
 
 {% block content %}
-<h1>Store List</h1>
-<ul>
-    {% for store in stores %}
-        <li>{{ store.name }} ({{ store.user_id.username }})</li>
+<style>
+    .btn-custom {
+        background-color: #FF8E2B; /* Button background color */
+        color: #0D2137; /* Button text color */
+        border: 2px solid #2E77AE; /* Button border color */
+    }
 
-    {% endfor %}
-</ul>
+    .btn-custom:hover {
+        background-color: #e67e22; /* Slightly darker shade for hover effect */
+        border-color: #2E77AE; /* Keep border color consistent */
+        color: #0D2137; /* Button text color on hover */
+    }
+
+    .text-custom {
+        color: #0D2137; /* Custom text color */
+    }
+
+    .card-custom {
+        border-color: #d32f2f; /* Card border color */
+    }
+
+    .card-body-custom {
+        background-color: #f5f5f5; /* Card body background color */
+    }
+
+    .list-group-item-custom {
+        color: #0D2137; /* List item text color */
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0 rounded card-custom">
+        <div class="card-body p-4 card-body-custom">
+            <h1 class="text-center mb-4 text-custom">Store List</h1>
+            {% if stores %}
+                <ul class="list-group">
+                    {% for store in stores %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-custom">
+                            <span class="fw-bold">{{ store.name }}</span>
+                            <span class="text-muted">({{ store.user_id.username }})</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-center text-custom">No stores available.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -6,39 +6,39 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-8 mx-auto">
-            <div class="card shadow-sm">
+            <div class="card shadow-lg p-4 rounded" style="background-color: #f9f9f9;">
                 <div class="card-body">
-                    <h2 class="card-title mb-4 text-center">Create Product for {{ store.name }}</h2>
+                    <h2 class="card-title mb-4 text-center" style="color: #ff6f61;">Create Product for {{ store.name }}</h2>
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         
                         <div class="mb-3">
-                            <label for="{{ form.product_pic.id_for_label }}" class="form-label">Product Picture</label>
-                            <input type="file" name="product_pic" id="{{ form.product_pic.id_for_label }}" class="form-control">
+                            <label for="{{ form.product_pic.id_for_label }}" class="form-label" style="color: #333333;">Product Picture</label>
+                            <input type="file" name="product_pic" id="{{ form.product_pic.id_for_label }}" class="form-control" style="border-color: #ff6f61;">
                         </div>
 
                         <div class="mb-3">
-                            <label for="{{ form.name.id_for_label }}" class="form-label">Product Name</label>
-                            <input type="text" name="name" id="{{ form.name.id_for_label }}" value="{{ form.name.value }}" class="form-control">
+                            <label for="{{ form.name.id_for_label }}" class="form-label" style="color: #333333;">Product Name</label>
+                            <input type="text" name="name" id="{{ form.name.id_for_label }}" value="{{ form.name.value }}" class="form-control" style="border-color: #ff6f61;">
                         </div>
 
                         <div class="mb-3">
-                            <label for="{{ form.description.id_for_label }}" class="form-label">Description</label>
-                            <textarea name="description" id="{{ form.description.id_for_label }}" class="form-control" rows="4">{{ form.description.value }}</textarea>
+                            <label for="{{ form.description.id_for_label }}" class="form-label" style="color: #333333;">Description</label>
+                            <textarea name="description" id="{{ form.description.id_for_label }}" class="form-control" rows="4" style="border-color: #ff6f61;">{{ form.description.value }}</textarea>
                         </div>
 
                         <div class="mb-3">
-                            <label for="{{ form.price.id_for_label }}" class="form-label">Price</label>
-                            <input type="number" name="price" id="{{ form.price.id_for_label }}" value="{{ form.price.value }}" class="form-control" step="0.01">
+                            <label for="{{ form.price.id_for_label }}" class="form-label" style="color: #333333;">Price</label>
+                            <input type="number" name="price" id="{{ form.price.id_for_label }}" value="{{ form.price.value }}" class="form-control" step="0.01" style="border-color: #ff6f61;">
                         </div>
 
                         <div class="mb-3">
-                            <label for="{{ form.stock.id_for_label }}" class="form-label">Stock</label>
-                            <input type="number" name="stock" id="{{ form.stock.id_for_label }}" value="{{ form.stock.value }}" class="form-control">
+                            <label for="{{ form.stock.id_for_label }}" class="form-label" style="color: #333333;">Stock</label>
+                            <input type="number" name="stock" id="{{ form.stock.id_for_label }}" value="{{ form.stock.value }}" class="form-control" style="border-color: #ff6f61;">
                         </div>
 
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Create Product</button>
+                            <button type="submit" class="btn" style="background-color: #ff6f61; color: #ffffff; border: none;">Create Product</button>
                         </div>
                     </form>
                 </div>

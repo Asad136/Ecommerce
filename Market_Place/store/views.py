@@ -261,7 +261,7 @@ def order_success(request):
 
 @login_required
 def seller_orders(request):
-    if request.user.role != 'seller':
+    if request.user.role == 'buyer' :
         return redirect('home')
     
     store = request.user.store

@@ -10,7 +10,9 @@
         {% for product in products %}
         <div class="col-md-4 mb-4">
             <div class="card sellerproduct-card">
-                <img src="{{ product.product_pic.url }}" alt="{{ product.name }}" class="card-img-top sellerproduct-img">
+                <div class="d-flex justify-content-center align-items-center" style="height: 300px; width:300px overflow: hidden;">
+                    <img src="{{ product.product_pic.url }}" class="card-img-top" alt="{{ product.name }}" style="height: 100%; width: 100%; ">
+                </div>
                 <div class="card-body">
                     <h5 class="card-title sellerproduct-title">{{ product.name }}</h5>
                     <p class="card-text sellerproduct-description">{{ product.description }}</p>

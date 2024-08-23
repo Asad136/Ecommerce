@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <style>
-        /* Purplish Dark Theme Styling */
+        /* Custom Color Scheme */
         body {
-            background-color: #2C003E;
-            color: #ffffff;
+            background-color: #f8f8f8; /* Light gray background */
+            color: #0D2137; /* Dark blue text color */
             font-family: 'Roboto', sans-serif;
             display: flex;
             justify-content: center;
@@ -18,10 +18,10 @@
         }
 
         .login-container {
-            background-color: #3B004A;
+            background-color: #ffffff; /* White background for form */
             padding: 40px;
             border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
             width: 100%;
             max-width: 400px;
         }
@@ -30,7 +30,7 @@
             margin-bottom: 30px;
             text-align: center;
             font-size: 24px;
-            color: #f5f5f5;
+            color: #0D2137; /* Dark blue text color */
         }
 
         .login-container form {
@@ -47,31 +47,32 @@
         .login-container form label {
             display: block;
             margin-bottom: 5px;
-            color: #bb86fc;
+            color: #0D2137; /* Dark blue text color */
             font-weight: bold;
         }
 
         .login-container form input {
             width: 100%;
-            background-color: #4A005C;
-            color: #ffffff;
-            border: 1px solid #6200ea;
+            background-color: #f0f0f0; /* Light gray input fields */
+            color: #0D2137; /* Dark blue text color */
+            border: 1px solid #2E77AE; /* Border color */
             padding: 12px;
             border-radius: 4px;
             font-size: 16px;
+            box-sizing: border-box; /* Ensures padding is included in width */
         }
 
         .login-container form input:focus {
-            border-color: #bb86fc;
+            border-color: #FF8E2B; /* Button color on focus */
             outline: none;
         }
 
         .login-container form button {
             width: 60%;
-            background-color: #bb86fc;
+            background-color: #FF8E2B; /* Button color */
             color: #ffffff;
             padding: 16px;
-            border: none;
+            border: 1px solid #2E77AE; /* Button border color */
             border-radius: 4px;
             font-size: 16px;
             cursor: pointer;
@@ -79,7 +80,7 @@
         }
 
         .login-container form button:hover {
-            background-color: #9c4dcc;
+            background-color: #e65c00; /* Darker orange on hover */
         }
 
         .login-container .register-link {
@@ -88,19 +89,28 @@
         }
 
         .login-container .register-link a {
-            color: #bb86fc;
+            color: #FF8E2B; /* Link color */
             text-decoration: none;
             font-weight: bold;
         }
 
         .login-container .register-link a:hover {
-            color: #ffffff;
+            color: #e65c00; /* Darker orange on hover */
         }
     </style>
 </head>
 <body>
     <div class="login-container">
         <h2>Login</h2>
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="message {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
         <form method="post">
             {% csrf_token %}
             <div class="form-group">

@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Profile</title>
     <style>
-        /* Purplish Dark Theme Styling */
         body {
-            background-color: #2C003E;
-            color: #ffffff;
+            background-color: #f5f5f5;
+            color: #0D2137; /* Updated text color */
             font-family: 'Roboto', sans-serif;
             display: flex;
             justify-content: center;
@@ -18,26 +17,24 @@
         }
 
         .profile-container {
-            background-color: #3B004A;
+            background-color: #ffffff;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 350px;
-            height: auto;
         }
 
         .profile-container h2 {
             margin-bottom: 15px;
             text-align: center;
             font-size: 20px;
-            color: #f5f5f5;
+            color: #FF8E2B; /* Updated heading color */
         }
 
         .profile-container form {
             display: flex;
             flex-direction: column;
-            align-items: stretch;
         }
 
         .profile-container form .form-group {
@@ -48,15 +45,17 @@
         .profile-container form label {
             display: block;
             margin-bottom: 3px;
-            color: #bb86fc;
+            color: #0D2137; /* Updated label color */
             font-weight: bold;
         }
 
-        .profile-container form input, .profile-container form select, .profile-container form textarea {
+        .profile-container form input, 
+        .profile-container form select, 
+        .profile-container form textarea {
             width: 100%;
-            background-color: #4A005C;
-            color: #ffffff;
-            border: 1px solid #6200ea;
+            background-color: #f9f9f9;
+            color: #0D2137; /* Updated input text color */
+            border: 1px solid #ddd;
             padding: 8px;
             border-radius: 4px;
             font-size: 14px;
@@ -68,17 +67,20 @@
             height: 40px;
         }
 
-        .profile-container form input:focus, .profile-container form select:focus, .profile-container form textarea:focus {
-            border-color: #bb86fc;
+        .profile-container form input:focus, 
+        .profile-container form select:focus, 
+        .profile-container form textarea:focus {
+            border-color: #FF8E2B; /* Updated focus border color */
             outline: none;
         }
 
         .profile-container form button {
             width: 100%;
-            background-color: #bb86fc;
+            background-color: #FF8E2B; /* Updated button background color */
+            border-color: #2E77AE; /* Updated button border color */
             color: #ffffff;
             padding: 10px;
-            border: none;
+            border: 1px solid #2E77AE; /* Updated button border color */
             border-radius: 4px;
             font-size: 14px;
             cursor: pointer;
@@ -86,21 +88,8 @@
         }
 
         .profile-container form button:hover {
-            background-color: #9c4dcc;
-        }
-
-        .profile-container .login-link {
-            margin-top: 15px;
-            text-align: center;
-        }
-
-        .profile-container .login-link a {
-            color: #bb86fc;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .profile-container .login-link a:hover {
+            background-color: #e67e22; /* Slightly darker shade for hover effect */
+            border-color: #2E77AE; /* Keep border color consistent */
             color: #ffffff;
         }
     </style>
@@ -126,10 +115,8 @@
                 <label for="id_address">Address:</label>
                 {{ form.address }}
             </div>
-          
             <button type="submit">Save Changes</button>
         </form>
-       
     </div>
 </body>
 </html>

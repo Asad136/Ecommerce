@@ -1,14 +1,52 @@
-
 {% extends 'base.html' %}
 
 {% block title %}Seller Orders{% endblock %}
 
 {% block content %}
+<style>
+    /* Custom Button Styles */
+    .btn-custom {
+        background-color: #FF8E2B; /* Button background color */
+        color: #ffffff; /* Button text color */
+        border: 2px solid #2E77AE; /* Button border color */
+    }
+
+    .btn-custom:hover {
+        background-color: #e67e22; /* Slightly darker shade for hover effect */
+        border-color: #2E77AE; /* Keep border color consistent */
+        color: #ffffff; /* Button text color on hover */
+    }
+
+    /* Custom Text and Table Styles */
+    h2 {
+        color: #0D2137; /* Heading text color */
+    }
+
+    .table {
+        background-color: #ffffff; /* Table background color */
+        border: 1px solid #e0e0e0; /* Table border color */
+    }
+
+    .thead-dark {
+        background-color: #FF8E2B; /* Table header background color */
+        color: #ffffff; /* Table header text color */
+    }
+
+    .text-center {
+        color: #0D2137; /* Centered text color */
+    }
+
+    /* Specific styling for the no orders message */
+    .no-orders-message {
+        color: #666666; /* Color for no orders message */
+    }
+</style>
+
 <div class="container my-5">
-    <h2>Your Orders</h2>
+    <h2 class="text-center">Your Orders</h2>
     {% if orders %}
-        <table class="table">
-            <thead>
+        <table class="table table-striped">
+            <thead class="thead-dark">
                 <tr>
                     <th>Order ID</th>
                     <th>Buyer</th>
@@ -25,7 +63,7 @@
                     <td>${{ order.total_amount }}</td>
                     <td>{{ order.created_at }}</td>
                     <td>
-                        <ul>
+                        <ul style="padding-left: 20px; list-style-type: disc;">
                             {% for item in order.filtered_items %}
                             <li>{{ item.product.name }} - {{ item.quantity }} @ ${{ item.price }}</li>
                             {% endfor %}
@@ -36,7 +74,7 @@
             </tbody>
         </table>
     {% else %}
-        <p>No orders found.</p>
+        <p class="text-center no-orders-message">No orders found.</p>
     {% endif %}
 </div>
 {% endblock %}

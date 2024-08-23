@@ -113,7 +113,9 @@ def edit_profile(request):
     return render(request, 'accounts/edit_profile.html', {'form': form})
 @login_required
 def logout(request):
+    cart = request.session.get('cart', {})
     auth_logout(request)
+    request.session['cart'] = cart
     return render(request,'landing.html')
 
 @login_required

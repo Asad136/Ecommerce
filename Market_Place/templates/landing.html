@@ -3,23 +3,85 @@
 {% block title %}Welcome to the E-Commerce Platform{% endblock %}
 
 {% block content %}
-<div class="jumbotron text-center bg-primary text-white">
+{% load static %}
+<div class="jumbotron text-center bg-dark text-white" style= "height:200px;">
     <h1 class="display-4">Welcome to Our E-Commerce Platform</h1>
     <p class="lead">Discover a wide range of products from various sellers and enjoy a seamless shopping experience.</p>
 </div>
 
+<!-- Search Bar -->
 <div class="container mt-5">
-    <div class="row text-center">
-        <div class="col-md-6 mb-4">
-            <div class="card shadow-sm border-0">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="GET" action="{% url 'home' %}">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="q" placeholder="Search for products...">
+                    <button class="btn btn-outline-dark" type="submit">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Product Display -->
+<div class="container mt-5">
+    <h2 class="text-center mb-4 text-white">Our Products</h2>
+    <div class="row">
+        {% for product in products %}
+            <div class="col-md-4 mb-4">
+                <div class="card bg-dark text-white">
+                    <div class="d-flex justify-content-center align-items-center" style="height: 300px; width:300px overflow: hidden;">
+                        <img src="{{ product.product_pic.url }}" class="card-img-top" alt="{{ product.name }}" style="height: 100%; width: 100%; ">
+                    </div>
+                        <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description|truncatewords:20 }}</p>
+                        <p class="card-text"><strong>Price:</strong> ${{ product.price }}</p>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <p class="text-white text-center">No products found.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Services Section -->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4 text-center">
+            <div class="card bg-dark text-white mb-4">
                 <div class="card-body">
-                    <h2 class="card-title">For signup</h2>
-                    <p class="card-text">Explore products, add items to your cart, and checkout easily.</p>
-                    <a href="{% url 'signup'%}" class="btn btn-outline-primary">sign up</a>
+                    <h4 class="card-title">Fast Shipping</h4>
+                    <p class="card-text">We ensure fast and reliable shipping for all your purchases.</p>
                 </div>
             </div>
         </div>
-        
+        <div class="col-md-4 text-center">
+            <div class="card bg-dark text-white mb-4">
+                <div class="card-body">
+                    <h4 class="card-title">24/7 Support</h4>
+                    <p class="card-text">Our support team is available around the clock to assist you.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 text-center">
+            <div class="card bg-dark text-white mb-4">
+                <div class="card-body">
+                    <h4 class="card-title">Secure Payment</h4>
+                    <p class="card-text">Enjoy safe and secure transactions with our trusted payment gateway.</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<!-- Details Section -->
+<div class="container mt-5">
+    <h2 class="text-center mb-4 textcolor">Why Choose Us?</h2>
+    <p class="text-center textcolor">Our platform provides an exceptional shopping experience with a wide range of products, reliable customer service, and secure payment options. Whether you're looking for the latest trends or timeless classics, we have something for everyone.</p>
+</div>
+
 {% endblock %}

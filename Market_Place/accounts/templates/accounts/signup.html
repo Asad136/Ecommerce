@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
     <style>
-        /* Purplish Dark Theme Styling */
+        /* Custom Color Scheme */
         body {
-            background-color: #2C003E;
-            color: #ffffff;
+            background-color: #f8f8f8; /* Light gray background */
+            color: #0D2137; /* Dark blue text color */
             font-family: 'Roboto', sans-serif;
             display: flex;
             justify-content: center;
@@ -18,10 +18,10 @@
         }
 
         .signup-container {
-            background-color: #3B004A;
+            background-color: #ffffff; /* White background for form */
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
             width: 100%;
             max-width: 350px;
             height: auto; /* Adjust height based on content */
@@ -30,8 +30,8 @@
         .signup-container h2 {
             margin-bottom: 15px;
             text-align: center;
-            font-size: 20px;
-            color: #f5f5f5;
+            font-size: 24px;
+            color: #0D2137; /* Dark blue text color */
         }
 
         .signup-container form {
@@ -42,21 +42,23 @@
 
         .signup-container form .form-group {
             width: 100%;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .signup-container form label {
             display: block;
-            margin-bottom: 3px;
-            color: #bb86fc;
+            margin-bottom: 5px;
+            color: #0D2137; /* Dark blue text color */
             font-weight: bold;
         }
 
-        .signup-container form input, .signup-container form select {
+        .signup-container form input, 
+        .signup-container form select, 
+        .signup-container form textarea {
             width: 100%;
-            background-color: #4A005C;
-            color: #ffffff;
-            border: 1px solid #6200ea;
+            background-color: #f0f0f0; /* Light gray input fields */
+            color: #0D2137; /* Dark blue text color */
+            border: 1px solid #2E77AE; /* Border color */
             padding: 8px;
             border-radius: 4px;
             font-size: 14px;
@@ -64,29 +66,23 @@
         }
 
         .signup-container form textarea {
-            width: 100%;
-            height: 40px; /* Reduced height for address field */
-            background-color: #4A005C;
-            color: #ffffff;
-            border: 1px solid #6200ea;
-            padding: 8px;
-            border-radius: 4px;
-            font-size: 14px;
+            height: 40px; /* Adjusted height for address field */
             resize: none; /* Disable resizing */
-            box-sizing: border-box; /* Ensures padding is included in width */
         }
 
-        .signup-container form input:focus, .signup-container form select:focus, .signup-container form textarea:focus {
-            border-color: #bb86fc;
+        .signup-container form input:focus, 
+        .signup-container form select:focus, 
+        .signup-container form textarea:focus {
+            border-color: #FF8E2B; /* Button color on focus */
             outline: none;
         }
 
         .signup-container form button {
             width: 100%;
-            background-color: #bb86fc;
+            background-color: #FF8E2B; /* Button color */
             color: #ffffff;
             padding: 10px;
-            border: none;
+            border: 1px solid #2E77AE; /* Button border color */
             border-radius: 4px;
             font-size: 14px;
             cursor: pointer;
@@ -94,7 +90,7 @@
         }
 
         .signup-container form button:hover {
-            background-color: #9c4dcc;
+            background-color: #e65c00; /* Darker orange on hover */
         }
 
         .signup-container .login-link {
@@ -103,19 +99,28 @@
         }
 
         .signup-container .login-link a {
-            color: #bb86fc;
+            color: #FF8E2B; /* Link color */
             text-decoration: none;
             font-weight: bold;
         }
 
         .signup-container .login-link a:hover {
-            color: #ffffff;
+            color: #e65c00; /* Darker orange on hover */
         }
     </style>
 </head>
 <body>
     <div class="signup-container">
         <h2>Sign Up</h2>
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="message {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %} 
         <form method="post">
             {% csrf_token %}
             <div class="form-group">

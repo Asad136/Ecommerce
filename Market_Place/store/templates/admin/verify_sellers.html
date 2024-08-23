@@ -1,10 +1,10 @@
-
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Unverified Sellers</h2>
-    <table>
-        <thead>
+<div class="container mt-5">
+    <h2 class="text-center mb-4 text-dark">Unverified Sellers</h2>
+    <table class="table table-striped table-bordered text-dark">
+        <thead class="thead-dark">
             <tr>
                 <th>Username</th>
                 <th>Email</th>
@@ -13,18 +13,23 @@
         </thead>
         <tbody>
             {% for seller in unverified_sellers %}
-                <tr>
+                <tr class="text-dark">
                     <td>{{ seller.username }}</td>
                     <td>{{ seller.email }}</td>
                     <td>
-                        <form method="post">
+                        <form method="post" class="d-inline">
                             {% csrf_token %}
                             <input type="hidden" name="seller_id" value="{{ seller.id }}">
-                            <button type="submit">Verify</button>
+                            <button type="submit" class="btn btn-success">Verify</button>
                         </form>
                     </td>
+                </tr>
+            {% empty %}
+                <tr class="text-dark">
+                    <td colspan="3" class="text-center">No unverified sellers found.</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+</div>
 {% endblock %}
