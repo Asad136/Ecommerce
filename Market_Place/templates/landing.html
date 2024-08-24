@@ -4,7 +4,58 @@
 
 {% block content %}
 {% load static %}
-<div class="jumbotron text-center bg-dark text-white" style= "height:200px;">
+
+<!-- Custom Styles -->
+<style>
+    body {
+        background-color: #E0EAF5; /* Body background color */
+    }
+
+    .btn-custom {
+        background-color: #FF8E2B; /* Button background color */
+        border-color: #2E77AE; /* Button border color */
+        color: #0D2137; /* Button text color */
+    }
+
+    .btn-custom:hover {
+        background-color: #e67e22; /* Slightly darker shade for hover effect */
+        border-color: #2E77AE; /* Keep border color consistent */
+        color: #0D2137; /* Button text color on hover */
+    }
+
+    .card {
+        background-color: #FFFFFF; /* Card background color */
+        color: #0D2137; /* Text color for card */
+        border: 1px solid #ddd; /* Card border color */
+    }
+
+    .card-title, .card-text {
+        color: #0D2137; /* Text color for card title and text */
+    }
+
+    .card-body {
+        background-color: #FFFFFF; /* Card body background color */
+    }
+
+    .text-white {
+        color: #0D2137; /* Text color for elements with text-white class */
+    }
+
+    .jumbotron {
+        color: #0D2137; /* Text color in the jumbotron */
+    }
+
+    /* Ensures image in card fits and is centered */
+    .card-img-top {
+        height: 200px; /* Fixed height for images */
+        object-fit: cover; /* Ensure images cover the area without distortion */
+        width: 100%; /* Full width of the card */
+        border-bottom: 1px solid #ddd; /* Optional border for separation */
+    }
+</style>
+
+<!-- Jumbotron -->
+<div class="jumbotron text-center bg-dark text-white" style="height: 200px;">
     <h1 class="display-4">Welcome to Our E-Commerce Platform</h1>
     <p class="lead">Discover a wide range of products from various sellers and enjoy a seamless shopping experience.</p>
 </div>
@@ -16,7 +67,7 @@
             <form method="GET" action="{% url 'home' %}">
                 <div class="input-group">
                     <input type="text" class="form-control" name="q" placeholder="Search for products...">
-                    <button class="btn btn-outline-dark" type="submit">Search</button>
+                    <button class="btn btn-custom" type="submit">Search</button>
                 </div>
             </form>
         </div>
@@ -25,24 +76,25 @@
 
 <!-- Product Display -->
 <div class="container mt-5">
-    <h2 class="text-center mb-4 text-white">Our Products</h2>
+    <h2 class="text-center mb-4" style="color: #0D2137;">Our Products</h2>
     <div class="row">
         {% for product in products %}
             <div class="col-md-4 mb-4">
-                <div class="card bg-dark text-white">
-                    <div class="d-flex justify-content-center align-items-center" style="height: 300px; width:300px overflow: hidden;">
+                <div class="card sellerproduct-card">
+                    <div class="d-flex justify-content-center align-items-center" style="height: 400px; width: 346px; overflow: hidden;">
                         <img src="{{ product.product_pic.url }}" class="card-img-top" alt="{{ product.name }}" style="height: 100%; width: 100%; ">
                     </div>
-                        <div class="card-body">
-                        <h5 class="card-title">{{ product.name }}</h5>
-                        <p class="card-text">{{ product.description|truncatewords:20 }}</p>
-                        <p class="card-text"><strong>Price:</strong> ${{ product.price }}</p>
-                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title sellerproduct-title">{{ product.name }}</h5>
+                        <p class="card-text sellerproduct-description">{{ product.description }}</p>
+                        <p class="card-text sellerproduct-price">Price: ${{ product.price }}</p>
+                        <p class="card-text sellerproduct-stock">Stock: {{ product.stock }}</p>
+                       </div>
                 </div>
             </div>
         {% empty %}
             <div class="col-12">
-                <p class="text-white text-center">No products found.</p>
+                <p class="text-center">No products found.</p>
             </div>
         {% endfor %}
     </div>
@@ -52,7 +104,7 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-4 text-center">
-            <div class="card bg-dark text-white mb-4">
+            <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Fast Shipping</h4>
                     <p class="card-text">We ensure fast and reliable shipping for all your purchases.</p>
@@ -60,7 +112,7 @@
             </div>
         </div>
         <div class="col-md-4 text-center">
-            <div class="card bg-dark text-white mb-4">
+            <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">24/7 Support</h4>
                     <p class="card-text">Our support team is available around the clock to assist you.</p>
@@ -68,7 +120,7 @@
             </div>
         </div>
         <div class="col-md-4 text-center">
-            <div class="card bg-dark text-white mb-4">
+            <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Secure Payment</h4>
                     <p class="card-text">Enjoy safe and secure transactions with our trusted payment gateway.</p>
@@ -80,8 +132,8 @@
 
 <!-- Details Section -->
 <div class="container mt-5">
-    <h2 class="text-center mb-4 textcolor">Why Choose Us?</h2>
-    <p class="text-center textcolor">Our platform provides an exceptional shopping experience with a wide range of products, reliable customer service, and secure payment options. Whether you're looking for the latest trends or timeless classics, we have something for everyone.</p>
+    <h2 class="text-center mb-4" style="color: #0D2137;">Why Choose Us?</h2>
+    <p class="text-center" style="color: #0D2137;">Our platform provides an exceptional shopping experience with a wide range of products, reliable customer service, and secure payment options. Whether you're looking for the latest trends or timeless classics, we have something for everyone.</p>
 </div>
 
 {% endblock %}
