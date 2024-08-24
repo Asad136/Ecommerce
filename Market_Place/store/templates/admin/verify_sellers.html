@@ -1,9 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
+    .btn-custom {
+        background-color: #FF8E2B; /* Button background color */
+        color: #0D2137; /* Button text color */
+        border: 2px solid #2E77AE; /* Button border color */
+    }
+
+    .btn-custom:hover {
+        background-color: #e67e22; /* Slightly darker shade for hover effect */
+        border-color: #2E77AE; /* Keep border color consistent */
+        color: #0D2137; /* Button text color on hover */
+    }
+
+    .table th, .table td {
+        color: #0D2137; /* Table text color */
+    }
+
+    .thead-dark th {
+        background-color: #2E77AE; /* Table header background color */
+        color: #FFFFFF; /* Table header text color */
+    }
+</style>
+
 <div class="container mt-5">
-    <h2 class="text-center mb-4 text-dark">Unverified Sellers</h2>
-    <table class="table table-striped table-bordered text-dark">
+    <h2 class="text-center mb-4" style="color: #0D2137;">Unverified Sellers</h2>
+    <table class="table table-striped table-bordered">
         <thead class="thead-dark">
             <tr>
                 <th>Username</th>
@@ -13,19 +36,19 @@
         </thead>
         <tbody>
             {% for seller in unverified_sellers %}
-                <tr class="text-dark">
+                <tr>
                     <td>{{ seller.username }}</td>
                     <td>{{ seller.email }}</td>
                     <td>
                         <form method="post" class="d-inline">
                             {% csrf_token %}
                             <input type="hidden" name="seller_id" value="{{ seller.id }}">
-                            <button type="submit" class="btn btn-success">Verify</button>
+                            <button type="submit" class="btn btn-custom">Verify</button>
                         </form>
                     </td>
                 </tr>
             {% empty %}
-                <tr class="text-dark">
+                <tr>
                     <td colspan="3" class="text-center">No unverified sellers found.</td>
                 </tr>
             {% endfor %}

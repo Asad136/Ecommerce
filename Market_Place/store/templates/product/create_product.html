@@ -3,42 +3,68 @@
 {% block title %}Create Product{% endblock %}
 
 {% block content %}
+<style>
+    .btn-custom {
+        background-color: #FF8E2B; /* Button background color */
+        color: #0D2137; /* Button text color */
+        border: 2px solid #2E77AE; /* Button border color */
+    }
+
+    .btn-custom:hover {
+        background-color: #e67e22; /* Slightly darker shade for hover effect */
+        border-color: #2E77AE; /* Keep border color consistent */
+        color: #0D2137; /* Button text color on hover */
+    }
+
+    .form-label-custom {
+        color: #0D2137; /* Label text color */
+    }
+
+    .form-control-custom {
+        border: 1px solid #2E77AE; /* Form control border color */
+    }
+
+    .card-custom {
+        background-color: #f9f9f9; /* Card background color */
+    }
+</style>
+
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-8 mx-auto">
-            <div class="card shadow-lg p-4 rounded" style="background-color: #f9f9f9;">
+            <div class="card shadow-lg p-4 rounded card-custom">
                 <div class="card-body">
-                    <h2 class="card-title mb-4 text-center" style="color: #ff6f61;">Create Product for {{ store.name }}</h2>
+                    <h2 class="card-title mb-4 text-center" style="color: #0D2137;">Create Product for {{ store.name }}</h2>
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         
                         <div class="mb-3">
-                            <label for="{{ form.product_pic.id_for_label }}" class="form-label" style="color: #333333;">Product Picture</label>
-                            <input type="file" name="product_pic" id="{{ form.product_pic.id_for_label }}" class="form-control" style="border-color: #ff6f61;">
+                            <label for="{{ form.product_pic.id_for_label }}" class="form-label form-label-custom">Product Picture</label>
+                            <input type="file" name="product_pic" id="{{ form.product_pic.id_for_label }}" class="form-control form-control-custom">
                         </div>
 
                         <div class="mb-3">
-                            <label for="{{ form.name.id_for_label }}" class="form-label" style="color: #333333;">Product Name</label>
-                            <input type="text" name="name" id="{{ form.name.id_for_label }}" value="{{ form.name.value }}" class="form-control" style="border-color: #ff6f61;">
+                            <label for="{{ form.name.id_for_label }}" class="form-label form-label-custom">Product Name</label>
+                            <input type="text" name="name" id="{{ form.name.id_for_label }}" value="{{ form.name.value }}" class="form-control form-control-custom">
                         </div>
 
                         <div class="mb-3">
-                            <label for="{{ form.description.id_for_label }}" class="form-label" style="color: #333333;">Description</label>
-                            <textarea name="description" id="{{ form.description.id_for_label }}" class="form-control" rows="4" style="border-color: #ff6f61;">{{ form.description.value }}</textarea>
+                            <label for="{{ form.description.id_for_label }}" class="form-label form-label-custom">Description</label>
+                            <textarea name="description" id="{{ form.description.id_for_label }}" class="form-control form-control-custom" rows="4">{{ form.description.value }}</textarea>
                         </div>
 
                         <div class="mb-3">
-                            <label for="{{ form.price.id_for_label }}" class="form-label" style="color: #333333;">Price</label>
-                            <input type="number" name="price" id="{{ form.price.id_for_label }}" value="{{ form.price.value }}" class="form-control" step="0.01" style="border-color: #ff6f61;">
+                            <label for="{{ form.price.id_for_label }}" class="form-label form-label-custom">Price</label>
+                            <input type="number" name="price" id="{{ form.price.id_for_label }}" value="{{ form.price.value }}" class="form-control form-control-custom" step="0.01">
                         </div>
 
                         <div class="mb-3">
-                            <label for="{{ form.stock.id_for_label }}" class="form-label" style="color: #333333;">Stock</label>
-                            <input type="number" name="stock" id="{{ form.stock.id_for_label }}" value="{{ form.stock.value }}" class="form-control" style="border-color: #ff6f61;">
+                            <label for="{{ form.stock.id_for_label }}" class="form-label form-label-custom">Stock</label>
+                            <input type="number" name="stock" id="{{ form.stock.id_for_label }}" value="{{ form.stock.value }}" class="form-control form-control-custom">
                         </div>
 
                         <div class="text-center">
-                            <button type="submit" class="btn" style="background-color: #ff6f61; color: #ffffff; border: none;">Create Product</button>
+                            <button type="submit" class="btn btn-custom">Create Product</button>
                         </div>
                     </form>
                 </div>

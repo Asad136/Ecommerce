@@ -3,45 +3,67 @@
 {% block title %}Update Product{% endblock %}
 
 {% block content %}
+<style>
+    .btn-custom {
+        background-color: #FF8E2B; /* Button background color */
+        color: #0D2137; /* Button text color */
+        border: 2px solid #2E77AE; /* Button border color */
+    }
+
+    .btn-custom:hover {
+        background-color: #e67e22; /* Slightly darker shade for hover effect */
+        border-color: #2E77AE; /* Keep border color consistent */
+        color: #0D2137; /* Button text color on hover */
+    }
+
+    .form-label {
+        color: #0D2137; /* Form label text color */
+    }
+
+    .form-control {
+        border-color: #2E77AE; /* Form control border color */
+    }
+</style>
+
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-8 mx-auto">
-            <div class="card shadow-lg border-0 rounded" style="border-color: #d32f2f;">
+            <div class="card shadow-lg border-0 rounded">
                 <div class="card-body p-4" style="background-color: #f5f5f5;">
-                    <h2 class="card-title text-center mb-4" style="color: #d32f2f;">Update Product for {{ store.name }}</h2>
+                    <h2 class="card-title text-center mb-4" style="color: #0D2137;">Update Product for {{ store.name }}</h2>
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         
                         <div class="mb-3">
-                            <label for="{{ form.product_pic.id_for_label }}" class="form-label" style="color: #d32f2f;">Product Picture</label>
+                            <label for="{{ form.product_pic.id_for_label }}" class="form-label">Product Picture</label>
                             <input type="file" name="product_pic" id="{{ form.product_pic.id_for_label }}" class="form-control">
                             {% if form.product_pic.value %}
-                                <img src="{{ form.product_pic.value.url }}" alt="Current Product Picture" class="img-fluid mt-2" style="max-width: 300px; border: 1px solid #d32f2f; border-radius: 4px;">
+                                <img src="{{ form.product_pic.value.url }}" alt="Current Product Picture" class="img-fluid mt-2" style="max-width: 300px; border: 1px solid #0D2137; border-radius: 4px;">
                             {% endif %}
                         </div>
 
                         <div class="mb-3">
-                            <label for="{{ form.name.id_for_label }}" class="form-label" style="color: #d32f2f;">Product Name</label>
+                            <label for="{{ form.name.id_for_label }}" class="form-label">Product Name</label>
                             <input type="text" name="name" id="{{ form.name.id_for_label }}" value="{{ form.name.value }}" class="form-control">
                         </div>
 
                         <div class="mb-3">
-                            <label for="{{ form.description.id_for_label }}" class="form-label" style="color: #d32f2f;">Description</label>
+                            <label for="{{ form.description.id_for_label }}" class="form-label">Description</label>
                             <textarea name="description" id="{{ form.description.id_for_label }}" class="form-control" rows="4">{{ form.description.value }}</textarea>
                         </div>
 
                         <div class="mb-3">
-                            <label for="{{ form.price.id_for_label }}" class="form-label" style="color: #d32f2f;">Price</label>
+                            <label for="{{ form.price.id_for_label }}" class="form-label">Price</label>
                             <input type="number" name="price" id="{{ form.price.id_for_label }}" value="{{ form.price.value }}" class="form-control" step="0.01">
                         </div>
 
                         <div class="mb-3">
-                            <label for="{{ form.stock.id_for_label }}" class="form-label" style="color: #d32f2f;">Stock</label>
+                            <label for="{{ form.stock.id_for_label }}" class="form-label">Stock</label>
                             <input type="number" name="stock" id="{{ form.stock.id_for_label }}" value="{{ form.stock.value }}" class="form-control">
                         </div>
 
                         <div class="text-center">
-                            <button type="submit" class="btn btn-danger" style="background-color: #d32f2f; border: none;">Update Product</button>
+                            <button type="submit" class="btn btn-custom">Update Product</button>
                         </div>
                     </form>
                 </div>

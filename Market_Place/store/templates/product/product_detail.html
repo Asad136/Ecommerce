@@ -3,27 +3,51 @@
 {% block title %}{{ product.name }}{% endblock %}
 
 {% block content %}
+<style>
+    .btn-custom {
+        background-color: #FF8E2B; /* Button background color */
+        color: #0D2137; /* Button text color */
+        border: 2px solid #2E77AE; /* Button border color */
+    }
+
+    .btn-custom:hover {
+        background-color: #e67e22; /* Slightly darker shade for hover effect */
+        border-color: #2E77AE; /* Keep border color consistent */
+        color: #0D2137; /* Button text color on hover */
+    }
+
+    .product-title {
+        color: #0D2137; /* Product title text color */
+    }
+
+    .product-description,
+    .product-price,
+    .product-stock {
+        color: #0D2137; /* Product details text color */
+    }
+</style>
+
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-10 mx-auto">
             <div class="card shadow-lg border-0 rounded" style="background-color: #f9f9f9;">
                 <div class="card-body p-5">
                     <div class="text-center mb-4">
-                        <h1 class="card-title mb-3" style="color: #ff6f61;">{{ product.name }}</h1>
-                        <img src="{{ product.product_pic.url }}" alt="{{ product.name }}" class="img-fluid" style="max-width: 100%; height: auto; border: 2px solid #ff6f61;">
+                        <h1 class="card-title mb-3 product-title">{{ product.name }}</h1>
+                        <img src="{{ product.product_pic.url }}" alt="{{ product.name }}" class="img-fluid" style="max-width: 100%; height: auto; border: 2px solid #FF8E2B;">
                     </div>
                     <div class="mb-4">
-                        <p class="lead mb-2" style="color: #333333;"><strong>Description:</strong></p>
-                        <p class="text-muted">{{ product.description }}</p>
-                        <p class="lead mb-2" style="color: #333333;"><strong>Price:</strong></p>
-                        <p class="text-muted" style="color: #ff6f61;">$ {{ product.price }}</p>
-                        <p class="lead mb-2" style="color: #333333;"><strong>Stock:</strong></p>
-                        <p class="text-muted">{{ product.stock }}</p>
+                        <p class="lead mb-2" style="color: #0D2137;"><strong>Description:</strong></p>
+                        <p class="text-muted product-description">{{ product.description }}</p>
+                        <p class="lead mb-2" style="color: #0D2137;"><strong>Price:</strong></p>
+                        <p class="text-muted product-price" style="color: #FF8E2B;">$ {{ product.price }}</p>
+                        <p class="lead mb-2" style="color: #0D2137;"><strong>Stock:</strong></p>
+                        <p class="text-muted product-stock">{{ product.stock }}</p>
                     </div>
                     <div class="text-center">
-                        <a href="{% url 'update_product' store_id=product.store.id pk=product.pk %}" class="btn" style="background-color: #ff6f61; color: #ffffff; border: none;">Edit Product</a>
-                        <a href="{% url 'delete_product' store_id=product.store.id pk=product.pk %}" class="btn" style="background-color: #dc3545; color: #ffffff; border: none;">Delete Product</a>
-                        <a href="{% url 'product_list' store_id=product.store.id %}" class="btn btn-secondary" style="background-color: #6c757d; color: #ffffff; border: none;">Back to Products List</a>
+                        <a href="{% url 'update_product' store_id=product.store.id pk=product.pk %}" class="btn btn-custom">Edit Product</a>
+                        <a href="{% url 'delete_product' store_id=product.store.id pk=product.pk %}" class="btn btn-custom">Delete Product</a>
+                        <a href="{% url 'product_list' store_id=product.store.id %}" class="btn btn-custom">Back to Products List</a>
                     </div>
                 </div>
             </div>

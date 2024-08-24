@@ -3,75 +3,88 @@
 {% block title %}Order Details{% endblock %}
 
 {% block content %}
-    <style>
-        .btn-custom {
-            background-color: #FF8E2B;
-            border-color: #2E77AE;
-            color: white;
-        }
-        .btn-custom:hover {
-            background-color: #e67e22; /* Slightly darker shade for hover effect */
-            border-color: #2E77AE; /* Keep border color consistent */
-            color: white;
-        }
-        .btn-custom-secondary {
-            background-color: #2E77AE;
-            border-color: #2E77AE;
-            color: white;
-        }
-        .btn-custom-secondary:hover {
-            background-color: #1e5f8d; /* Slightly darker shade for hover effect */
-            border-color: #2E77AE;
-            color: white;
-        }
-    </style>
+<style>
+    .btn-custom {
+        background-color: #FF8E2B; /* Button background color */
+        border-color: #2E77AE; /* Button border color */
+        color: #0D2137; /* Button text color */
+    }
 
-    <div class="container mt-5">
-        <div class="card shadow-lg p-4 rounded" style="background-color: #f9f9f9; color: #333333;">
-            <div class="card-body">
-                <h2 class="card-title text-center mb-4" style="color: #ff6f61;">Order Details</h2>
+    .btn-custom:hover {
+        background-color: #e67e22; /* Slightly darker shade for hover effect */
+        border-color: #2E77AE; /* Keep border color consistent */
+        color: #0D2137; /* Button text color on hover */
+    }
 
-                <div class="order-info mb-4">
-                    <p><strong>Order ID:</strong> {{ order.order_id }}</p>
-                    <p><strong>Total Amount:</strong> <span style="color: #ff6f61;">${{ order.total_amount }}</span></p>
-                    <p><strong>Status:</strong> 
-                        <span class="badge {% if order.status == 'Delivered' %} bg-success {% elif order.status == 'Pending' %} bg-warning {% else %} bg-secondary {% endif %}">
-                            {{ order.status }}
-                        </span>
-                    </p>
-                    <p><strong>Date:</strong> {{ order.created_at|date:"d M Y H:i" }}</p>
-                </div>
+    .btn-custom-secondary {
+        background-color: #FF8E2B; /* Secondary button background color */
+        border-color: #2E77AE; /* Secondary button border color */
+        color: #0D2137; /* Secondary button text color */
+    }
 
-                <h3 class="mb-4" style="color: #333333;">Order Items</h3>
-                <ul class="list-group mb-4">
-                    {% for item in order_items %}
-                        <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #ffffff; color: #333333;">
-                            <div>
-                                <strong>Product:</strong> {{ item.product.name }} <br>
-                                <strong>Quantity:</strong> {{ item.quantity }} 
-                            </div>
-                            <div>
-                                <strong>Price:</strong> <span style="color: #ff6f61;">${{ item.price }}</span>
-                            </div>
-                        </li>
-                    {% endfor %}
-                </ul>
+    .btn-custom-secondary:hover {
+        background-color: #e67e22; /* Slightly darker shade for hover effect */
+        border-color: #2E77AE; /* Keep border color consistent */
+        color: #0D2137; /* Button text color on hover */
+    }
 
-                <!-- Update Button -->
-                <a href="{% url 'update_order' order_id=order.order_id %}" class="btn btn-custom btn-lg btn-block mb-2">
-                    Update Order
-                </a>
+    .card-title {
+        color: #FF8E2B; /* Card title color */
+    }
 
-                <!-- Order Now Button -->
-                <a href="{% url 'order_now' %}" class="btn btn-custom btn-lg btn-block mb-2">
-                    Order Now
-                </a>
+    .list-group-item {
+        color: #0D2137; /* Text color for list items */
+    }
 
-                <!-- Back to Order History Button -->
-                <a href="{% url 'order_history' %}" class="btn btn-custom-secondary btn-lg btn-block mt-4">
-                    Back to Order History
-                </a>
+    .badge-success {
+        background-color: #28a745; /* Green badge for 'Delivered' status */
+    }
+
+    .badge-warning {
+        background-color: #ffc107; /* Yellow badge for 'Pending' status */
+    }
+
+    .badge-secondary {
+        background-color: #6c757d; /* Grey badge for other statuses */
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="card shadow-lg p-4 rounded" style="background-color: #f9f9f9; color: #0D2137;">
+        <div class="card-body">
+            <h2 class="card-title text-center mb-4">Order Details</h2>
+
+            <div class="order-info mb-4">
+                <p><strong>Order ID:</strong> {{ order.order_id }}</p>
+                <p><strong>Total Amount:</strong> <span style="color: #FF8E2B;">${{ order.total_amount }}</span></p>
+                <p><strong>Status:</strong> 
+                    <span class="badge {% if order.status == 'Delivered' %} badge-success {% elif order.status == 'Pending' %} badge-warning {% else %} badge-secondary {% endif %}">
+                        {{ order.status }}
+                    </span>
+                </p>
+                <p><strong>Date:</strong> {{ order.created_at|date:"d M Y H:i" }}</p>
             </div>
+
+            <h3 class="mb-4">Order Items</h3>
+            <ul class="list-group mb-4">
+                {% for item in order_items %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #ffffff; color: #0D2137;">
+                        <div>
+                            <strong>Product:</strong> {{ item.product.name }} <br>
+                            <strong>Quantity:</strong> {{ item.quantity }} 
+                        </div>
+                        <div>
+                            <strong>Price:</strong> <span style="color: #FF8E2B;">${{ item.price }}</span>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <!-- Back to Order History Button -->
+            <a href="{% url 'order_history' %}" class="btn btn-custom-secondary btn-lg btn-block mt-4">
+                Back to Order History
+            </a>
         </div>
     </div>
+</div>
 {% endblock %}
