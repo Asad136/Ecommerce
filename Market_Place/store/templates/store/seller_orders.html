@@ -4,75 +4,103 @@
 
 {% block content %}
 <style>
-    /* Custom Button Styles */
     .btn-custom {
-        background-color: #FF8E2B; /* Button background color */
-        color: #ffffff; /* Button text color */
-        border: 2px solid #2E77AE; /* Button border color */
+        background-color: #FF8E2B;
+        color: #ffffff;
+        border: 2px solid #2E77AE;
     }
 
     .btn-custom:hover {
-        background-color: #e67e22; /* Slightly darker shade for hover effect */
-        border-color: #2E77AE; /* Keep border color consistent */
-        color: #ffffff; /* Button text color on hover */
+        background-color: #e67e22;
+        border-color: #2E77AE;
+        color: #ffffff;
     }
 
-    /* Custom Text and Table Styles */
     h2 {
-        color: #0D2137; /* Heading text color */
+        color: #0D2137;
+    }
+
+    .table-container {
+        overflow-x: auto;
     }
 
     .table {
-        background-color: #ffffff; /* Table background color */
-        border: 1px solid #e0e0e0; /* Table border color */
+        background-color: #ffffff;
+        border: 1px solid #e0e0e0;
+        width: 100%;
+        min-width: 600px; /* Ensure the table is wide enough to scroll */
     }
 
     .thead-dark {
-        background-color: #FF8E2B; /* Table header background color */
-        color: #ffffff; /* Table header text color */
+        background-color: #FF8E2B;
+        color: #ffffff;
     }
 
     .text-center {
-        color: #0D2137; /* Centered text color */
+        color: #0D2137;
     }
 
-    /* Specific styling for the no orders message */
     .no-orders-message {
-        color: #666666; /* Color for no orders message */
+        color: #666666;
+    }
+
+    @media (max-width: 768px) {
+        .table th, .table td {
+            font-size: 0.875rem;
+            padding: 0.5rem;
+            white-space: nowrap; /* Prevent text from wrapping */
+        }
+    }
+
+    @media (max-width: 375px) {
+        h2 {
+            font-size: 1.25rem;
+        }
+
+        .table th, .table td {
+            font-size: 0.75rem;
+            padding: 0.25rem;
+        }
+
+        .table {
+            font-size: 0.75rem;
+        }
     }
 </style>
 
 <div class="container my-5">
     <h2 class="text-center">Your Orders</h2>
     {% if orders %}
-        <table class="table table-striped">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Order ID</th>
-                    <th>Buyer</th>
-                    <th>Total Amount</th>
-                    <th>Created At</th>
-                    <th>Products</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for order in orders %}
-                <tr>
-                    <td>{{ order.order_id }}</td>
-                    <td>{{ order.user.username }}</td>
-                    <td>${{ order.total_amount }}</td>
-                    <td>{{ order.created_at }}</td>
-                    <td>
-                        <ul style="padding-left: 20px; list-style-type: disc;">
-                            {% for item in order.filtered_items %}
-                            <li>{{ item.product.name }} - {{ item.quantity }} @ ${{ item.price }}</li>
-                            {% endfor %}
-                        </ul>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="table-container">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Buyer</th>
+                        <th>Total Amount</th>
+                        <th>Created At</th>
+                        <th>Products</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td>{{ order.order_id }}</td>
+                        <td>{{ order.user.username }}</td>
+                        <td>${{ order.total_amount }}</td>
+                        <td>{{ order.created_at }}</td>
+                        <td>
+                            <ul style="padding-left: 20px; list-style-type: disc;">
+                                {% for item in order.filtered_items %}
+                                <li>{{ item.product.name }} - {{ item.quantity }} @ ${{ item.price }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     {% else %}
         <p class="text-center no-orders-message">No orders found.</p>
     {% endif %}
