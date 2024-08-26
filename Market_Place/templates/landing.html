@@ -81,8 +81,8 @@
         {% for product in products %}
             <div class="col-md-4 mb-4">
                 <div class="card sellerproduct-card">
-                    <div class="d-flex justify-content-center align-items-center" style="height: 400px; width: 346px; overflow: hidden;">
-                        <img src="{{ product.product_pic.url }}" class="card-img-top" alt="{{ product.name }}" style="height: 100%; width: 100%; ">
+                    <div class="d-flex justify-content-center align-items-center" style="height: 300px; overflow: hidden;">
+                        <img src="{{ product.product_pic.url }}" class="card-img-top" alt="{{ product.name }}" style="height: 100%; width: 100%; object-fit: cover;">
                     </div>
                     <div class="card-body">
                         <h5 class="card-title sellerproduct-title">{{ product.name }}</h5>
